@@ -1,0 +1,28 @@
+:root {
+    --sidebar-width: 240px;
+    --fluent-primary: #0078d4;
+    --fluent-primary-light: #e6f4ff;
+    --fluent-text: #1a1a1a;
+    --fluent-text-secondary: #666666;
+    --fluent-background: #ffffff;
+    --fluent-border: #eaeaea;
+    --fluent-hover: #f3f3f3;
+    --fluent-selected: #e6f4ff;
+    --fluent-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+    font-family: "Segoe UI", system-ui;
+}
+
+.page-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    flex-grow: 1;
+    transition: all 0.3s ease;
+}
