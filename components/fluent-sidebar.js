@@ -115,7 +115,7 @@ class FluentSidebar extends HTMLElement {
                 </div>
                 <ul class="nav-links">
                     <li><a href="#" class="nav-link active">Home</a></li>
-                    <li><a href="#" class="nav-link">About</a></li>
+                    <li><a href="/download.html" class="nav-link">Download</a></li>
                     <li><a href="#" class="nav-link">Services</a></li>
                     <li><a href="#" class="nav-link">Contact</a></li>
                 </ul>
