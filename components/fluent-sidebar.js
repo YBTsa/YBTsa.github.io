@@ -24,7 +24,7 @@ class FluentSidebar extends HTMLElement {
                     display: block;
                 }
                 
-                .fluent-sidebar-nav {
+                .sidebar {
                     width: var(--sidebar-width);
                     background-color: var(--fluent-background);
                     box-shadow: var(--fluent-shadow);
@@ -32,30 +32,34 @@ class FluentSidebar extends HTMLElement {
                     position: fixed;
                     display: flex;
                     flex-direction: column;
-                    transition: background-color 0.3s ease;
                 }
-
-                .nav-header {
+                
+                .header {
                     padding: 20px;
                     border-bottom: 1px solid var(--fluent-border);
                 }
-
-                .nav-logo {
+                
+                .logo {
                     font-weight: 600;
                     font-size: 1.2rem;
                     color: var(--fluent-primary);
                     text-decoration: none;
+                    display: inline-block;
                 }
-
-                .nav-links {
+                
+                .logo img {
+                    width: 40%;
+                }
+                
+                .nav-list {
                     list-style: none;
                     padding: 0;
                     margin: 0;
                     flex-grow: 1;
                     overflow-y: auto;
                 }
-
-                .nav-link {
+                
+                .nav-item a {
                     display: block;
                     padding: 12px 20px;
                     color: var(--fluent-text);
@@ -64,17 +68,17 @@ class FluentSidebar extends HTMLElement {
                     transition: background-color 0.2s ease-in-out;
                     position: relative;
                 }
-
-                .nav-link:hover {
+                
+                .nav-item a:hover {
                     background-color: var(--fluent-hover);
                 }
-
-                .nav-link.active {
+                
+                .nav-item a.active {
                     color: var(--fluent-primary);
                     font-weight: 500;
                 }
-
-                .nav-link.active::before {
+                
+                .nav-item a.active::before {
                     content: '';
                     position: absolute;
                     left: 0;
@@ -83,71 +87,53 @@ class FluentSidebar extends HTMLElement {
                     width: 3px;
                     background-color: var(--fluent-primary);
                 }
-
-                .fluent-button {
-                    background-color: var(--fluent-primary);
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    padding: 8px 16px;
-                    font-size: 0.9rem;
-                    font-weight: 500;
-                    cursor: pointer;
-                    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                    margin-right: 8px;
-                    margin-bottom: 8px;
-                }
-
-                .fluent-button:hover {
-                    background-color: #005a9e;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-                }
-
-                .fluent-button:active {
-                    background-color: #004578;
-                    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-                }
             </style>
-            <nav class="fluent-sidebar-nav">
-                <div class="nav-header">
-                    <a href="#" class="nav-logo"><img alt="logo" src="/images/logo.ico" style="width: 40%"/></a>
+            <nav class="sidebar">
+                <div class="header">
+                    <a href="#" class="logo"><img alt="logo" src="/images/logo.ico"/></a>
                 </div>
-                <ul class="nav-links">
-                    <li><a href="#" class="nav-link active">Home</a></li>
-                    <li><a href="/download.html" class="nav-link">Download</a></li>
-                    <li><a href="#" class="nav-link">Services</a></li>
-                    <li><a href="#" class="nav-link">Contact</a></li>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="/index.html" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="/download.html" class="nav-link">Download</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
         `;
 
         // 将模板内容克隆到shadow root
-        const clone = template.content.cloneNode(true);
-        shadow.appendChild(clone);
+        shadow.appendChild(template.content.cloneNode(true));
     }
 
     // 当元素被添加到DOM时调用
     connectedCallback() {
-        this.setupEventListeners();
+        this.setupNavigation();
     }
 
-
-    // 设置事件监听器
-    setupEventListeners() {
-
-        // 链接点击事件
+    // 设置导航逻辑
+    setupNavigation() {
         const navLinks = this.shadowRoot.querySelectorAll('.nav-link');
+        const currentPath = window.location.pathname;
+
+        // 设置初始活动链接
         navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if ((href === '#' && currentPath === '/') || currentPath.includes(href)) {
+                link.classList.add('active');
+            }
+
             link.addEventListener('click', (_) => {
                 // 移除所有活动状态
                 navLinks.forEach(l => l.classList.remove('active'));
                 // 添加当前链接的活动状态
                 link.classList.add('active');
 
+                // 保存活动链接到localStorage
+                localStorage.setItem('activeLink', href);
+
                 // 触发自定义事件通知外部链接点击
                 this.dispatchEvent(new CustomEvent('navLinkClicked', {
-                    detail: {href: link.getAttribute('href')},
+                    detail: {href},
                     bubbles: true,
                     composed: true
                 }));

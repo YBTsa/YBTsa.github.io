@@ -6,45 +6,50 @@
     <link href="/images/logo.ico" rel="icon" type="image/x-icon"/>
     <script src="https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js" type="module"></script>
     <style>
-        .info {
-            width: 100%;
-            height: 100%;
+        body {
+            font-family: "Segoe UI", system-ui;
+            margin: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-
-        body {
-            font-family: "Segoe UI", system-ui;
-        }
     </style>
 </head>
 <body>
-<script>
-    window.onload = function () {
-        const info = document.querySelector('.info');
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
-        if (id == null) {
-            info.innerHTML = '<h1>Error</h1><br/><p>Invalid redirect ID</p>';
-        }
-        switch (id) {
-            case 'download':
-                info.hidden = false;
-                setTimeout(function () {
-                    window.location.href = '/download.html';
-                }, 4000)
-                break;
-        }
-    }
-</script>
-<div class="info" hidden>
+<div id="info">
     <h1>Redirecting...</h1>
     <br/>
     <p>Please wait...</p>
     <br/>
     <fluent-progress-ring></fluent-progress-ring>
 </div>
+
+<script>
+    window.onload = () => {
+        const info = document.getElementById('info');
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        if (!id) {
+            info.innerHTML = '<h1>Error</h1><br/><p>Invalid redirect ID</p>';
+            return;
+        }
+
+        // 简单的重定向映射
+        const redirectMap = {
+            'download': '/download.html'
+        };
+
+        if (redirectMap[id]) {
+            setTimeout(() => {
+                window.location.href = redirectMap[id];
+            }, 4000);
+        } else {
+            info.innerHTML = '<h1>Error</h1><br/><p>Redirect ID not found</p>';
+        }
+    };
+</script>
 </body>
 </html>

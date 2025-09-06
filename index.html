@@ -5,22 +5,40 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Dashboard | YoungBat</title>
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/images/logo.ico" rel="icon" type="image/x-icon">
+
+    <!-- 引入Web Component脚本 -->
+    <script src="https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js" type="module"></script>
+    <script src="/components/fluent-sidebar.js"></script>
+
     <style>
-        fluent-card {
-            width: 20%;
-            height: 100%;
+        :root {
+            --card-width: 20%;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --card-width: 45%;
+            }
+        }
+
+        .page-content {
+            margin-left: 240px; /* 与侧边栏宽度匹配 */
+            padding: 20px;
         }
 
         .product-container {
-            flex-wrap: wrap;
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        fluent-card {
+            width: var(--card-width);
+            min-height: 120px;
         }
     </style>
-
-    <!-- 引入Web Component脚本 -->
-    <script src="/components/fluent-sidebar.js"></script>
-    <script src="https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js" type="module"></script>
-    <link href="/images/logo.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
 <!-- 使用Fluent Sidebar Web Component -->
@@ -31,38 +49,13 @@
     <h2>What's new?</h2>
     <p>We've updated the Fluent Design Navigation Bar to include new features and improvements. Check out the latest
         version on GitHub!</p>
+
     <h2>Looking for our products?</h2>
     <div class="product-container">
         <fluent-card>
-            <h3>Product 1</h3>
-            <p>Description of Product 1</p>
+            <h3>Product ${i+1}</h3>
+            <p>Description of Product ${i+1}</p>
         </fluent-card>
-
-        <fluent-card>
-            <h3>Product 2</h3>
-            <p>Description of Product 2</p>
-        </fluent-card>
-
-        <fluent-card>
-            <h3>Product 3</h3>
-            <p>Description of Product 3</p>
-        </fluent-card>
-
-        <fluent-card>
-            <h3>Product 4</h3>
-            <p>Description of Product 4</p>
-        </fluent-card>
-
-        <fluent-card>
-            <h3>Product 5</h3>
-            <p>Description of Product 5</p>
-        </fluent-card>
-
-        <fluent-card>
-            <h3>Product 6</h3>
-            <p>Description of Product 6</p>
-        </fluent-card>
-        <fluent-progress-ring></fluent-progress-ring>
     </div>
 </div>
 </body>
