@@ -100,7 +100,7 @@ class FluentSidebar extends HTMLElement {
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
                 <div class="footer" >
-                    <p>© 2020-2025 YoungBat. <br/>All rights reserved.</p>
+                    <p>© 2020-2025 YoungBat. All rights reserved.</p>
                 </div>
             </nav>
         `;
