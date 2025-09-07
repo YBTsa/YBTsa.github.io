@@ -90,10 +90,10 @@ class FluentSidebar extends HTMLElement {
             </style>
             <nav class="sidebar">
                 <div class="header">
-                    <a href="#" class="logo"><img alt="logo" src="/images/logo.ico"/></a>
+                    <a href="/index.html" class="logo"><img alt="logo" src="/images/logo.ico"/></a>
                 </div>
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="/index.html" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/download.html" class="nav-link">Download</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
@@ -125,6 +125,7 @@ class FluentSidebar extends HTMLElement {
             link.addEventListener('click', (_) => {
                 // 移除所有活动状态
                 navLinks.forEach(l => l.classList.remove('active'));
+                console.log("remove active")
                 // 添加当前链接的活动状态
                 link.classList.add('active');
 
