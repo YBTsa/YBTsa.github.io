@@ -2,7 +2,7 @@
 class FluentSidebar extends HTMLElement {
     constructor() {
         super();
-
+        import('https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js');
         // 创建一个shadow root
         const shadow = this.attachShadow({mode: 'open'});
 
@@ -23,7 +23,9 @@ class FluentSidebar extends HTMLElement {
                     --fluent-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                     display: block;
                 }
-                
+                div,p,a,li{
+                    font-family: "Segoe UI",system-ui;
+                }
                 .sidebar {
                     width: var(--sidebar-width);
                     background-color: var(--fluent-background);
@@ -33,7 +35,6 @@ class FluentSidebar extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                 }
-                
                 .header {
                     padding: 20px;
                     border-bottom: 1px solid var(--fluent-border);
@@ -48,7 +49,7 @@ class FluentSidebar extends HTMLElement {
                 }
                 
                 .logo img {
-                    width: 40%;
+                    width: 20%;
                 }
                 
                 .nav-list {
@@ -90,56 +91,22 @@ class FluentSidebar extends HTMLElement {
             </style>
             <nav class="sidebar">
                 <div class="header">
-                    <a href="/index.html" class="logo"><img alt="logo" src="/images/logo.ico"/></a>
+                    <a href="/index.html" class="logo"><img alt="logo" src="/images/logo.ico"/>YoungBat</a>
                 </div>
                 <ul class="nav-list">
-                    <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/index.html"  class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="/download.html" class="nav-link">Download</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
+                <div class="footer" >
+                    <p>© 2020-2025 YoungBat. <br/>All rights reserved.</p>
+                </div>
             </nav>
         `;
 
         // 将模板内容克隆到shadow root
         shadow.appendChild(template.content.cloneNode(true));
-    }
-
-    // 当元素被添加到DOM时调用
-    connectedCallback() {
-        this.setupNavigation();
-    }
-
-    // 设置导航逻辑
-    setupNavigation() {
-        const navLinks = this.shadowRoot.querySelectorAll('.nav-link');
-        const currentPath = window.location.pathname;
-
-        // 设置初始活动链接
-        navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if ((href === '#' && currentPath === '/') || currentPath.includes(href)) {
-                link.classList.add('active');
-            }
-
-            link.addEventListener('click', (_) => {
-                // 移除所有活动状态
-                navLinks.forEach(l => l.classList.remove('active'));
-                console.log("remove active")
-                // 添加当前链接的活动状态
-                link.classList.add('active');
-
-                // 保存活动链接到localStorage
-                localStorage.setItem('activeLink', href);
-
-                // 触发自定义事件通知外部链接点击
-                this.dispatchEvent(new CustomEvent('navLinkClicked', {
-                    detail: {href},
-                    bubbles: true,
-                    composed: true
-                }));
-            });
-        });
     }
 }
 

@@ -22,6 +22,9 @@
             }
         }
 
+        body {
+            font-family: "Segoe UI", system-ui;
+        }
         .page-content {
             margin-left: 240px; /* 与侧边栏宽度匹配 */
             padding: 20px;
@@ -53,8 +56,14 @@
     <h2>Looking for our products?</h2>
     <div class="product-container">
         <fluent-card>
-            <h3>Product ${i+1}</h3>
-            <p>Description of Product ${i+1}</p>
+            <h3>YOptimizer</h3>
+            <p>YOptimizer is a tool that helps you optimize your PC's performance.</p>
+            <fluent-button onclick="redirect()" type="button">Download</fluent-button>
+            <script>
+                function redirect() {
+                    window.location.href = '/redirect.html?id=download';
+                }
+            </script>
         </fluent-card>
     </div>
 </div>
