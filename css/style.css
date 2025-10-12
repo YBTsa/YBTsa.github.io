@@ -11,13 +11,36 @@
     --fluent-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* 深色模式变量 */
+:root[data-theme="dark"] {
+    --fluent-primary: #2d89ef;
+    --fluent-primary-light: #003366;
+    --fluent-text: #f0f0f0;
+    --fluent-text-secondary: #bbbbbb;
+    --fluent-background: #1e1e1e;
+    --fluent-border: #333333;
+    --fluent-hover: #333333;
+    --fluent-selected: #003366;
+    --fluent-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 保持其他样式不变 */
 body {
     margin: 0;
     padding: 0;
     display: flex;
     min-height: 100vh;
     transition: background-color 0.3s ease;
-    font-family: "Segoe UI", system-ui;
+    font-family: "Segoe UI Variable", system-ui;
+    background-color: var(--fluent-background);
+    color: var(--fluent-text);
+}
+
+fluent-card {
+    font-family: "Segoe UI Variable", system-ui;
+    background-color: var(--fluent-background);
+    color: var(--fluent-text);
+    border-color: var(--fluent-border);
 }
 
 .page-content {

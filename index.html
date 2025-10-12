@@ -56,12 +56,12 @@
     <h2>Looking for our products?</h2>
     <div class="product-container">
         <fluent-card>
-            <h3>YOptimizer</h3>
+            <h3>MFSC</h3>
             <p>YOptimizer is a tool that helps you optimize your PC's performance.</p>
-            <fluent-button onclick="redirect()" type="button">Download</fluent-button>
+            <fluent-button appearance="accent" onclick="redirect('mfsc')" type="button">Download</fluent-button>
             <script>
-                function redirect() {
-                    window.location.href = '/redirect.html?id=download';
+                function redirect(id) {
+                    window.location.href = '/download.html#' + id;
                 }
             </script>
         </fluent-card>

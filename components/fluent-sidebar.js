@@ -3,28 +3,19 @@ class FluentSidebar extends HTMLElement {
     constructor() {
         super();
         import('https://unpkg.com/@fluentui/web-components@2.6.1/dist/web-components.min.js');
-        // 创建一个shadow root
         const shadow = this.attachShadow({mode: 'open'});
 
-        // 组件模板
+        // 组件模板 (保持不变)
         const template = document.createElement('template');
         template.innerHTML = `
             <style>
                 :host {
                     --sidebar-width: 240px;
-                    --fluent-primary: #0078d4;
-                    --fluent-primary-light: #e6f4ff;
-                    --fluent-text: #1a1a1a;
-                    --fluent-text-secondary: #666666;
-                    --fluent-background: #ffffff;
-                    --fluent-border: #eaeaea;
-                    --fluent-hover: #f3f3f3;
-                    --fluent-selected: #e6f4ff;
-                    --fluent-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                     display: block;
                 }
+                /* 移除本地变量定义，使用全局变量 */
                 div,p,a,li{
-                    font-family: "Segoe UI",system-ui;
+                    font-family: "Segoe UI Variable", system-ui;
                 }
                 .sidebar {
                     width: var(--sidebar-width);
@@ -88,6 +79,14 @@ class FluentSidebar extends HTMLElement {
                     width: 3px;
                     background-color: var(--fluent-primary);
                 }
+                .footer {
+                    padding: 20px;
+                    border-top: 1px solid var(--fluent-border);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
             </style>
             <nav class="sidebar">
                 <div class="header">
@@ -99,14 +98,46 @@ class FluentSidebar extends HTMLElement {
                     <li class="nav-item"><a href="#" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
-                <div class="footer" >
-                    <p>© 2020-2025 YoungBat. All rights reserved.</p>
+                <div class="footer">
+                    <fluent-switch id="themeSwitch">
+                        <fluent-icon name="moon"></fluent-icon>
+                        <fluent-icon ></fluent-icon>
+                    </fluent-switch>
                 </div>
             </nav>
         `;
 
-        // 将模板内容克隆到shadow root
         shadow.appendChild(template.content.cloneNode(true));
+
+        // 初始化主题
+        this.initTheme();
+
+        // 添加主题切换事件
+        this.shadowRoot.getElementById('themeSwitch').addEventListener('change', (e) => {
+            this.toggleTheme(e.target.checked);
+        });
+    }
+
+    // 初始化主题
+    initTheme() {
+        const isDark = localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            this.shadowRoot.getElementById('themeSwitch').checked = true;
+        }
+    }
+
+    // 切换主题
+    toggleTheme(isDark) {
+        if (isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        }
     }
 }
 
