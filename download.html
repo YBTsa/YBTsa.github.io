@@ -27,17 +27,33 @@
 <fluent-sidebar></fluent-sidebar>
 
 <div class="page-content">
-    <h1>Dashboard</h1>
-    <h2>What's new?</h2>
-    <p>We've updated the Fluent Design Navigation Bar to include new features and improvements. Check out the latest
-        version on GitHub!</p>
-    <h2>Looking for our products?</h2>
+    <h1>Download</h1>
     <div class="product-container">
         <fluent-card id="mfsc">
-            <h3>Manager For School Computer</h3>
-            <p>Optimizer For School Computer is a tool that helps you optimize your school computer's performance.</p>
+            <h3>MFSC(Manager For School Computer)</h3>
+            <p>Manager For School Computer is a tool that helps you optimize your school computer's performance.</p>
+            <fluent-button appearance="accent" data-repo="YBTsa/MFSC" onclick="window.location.href = fetchLatestFirstBrowserDownloadUrl('YBTsa/MFSC')"
+                           type="button">Get
+            </fluent-button>
         </fluent-card>
     </div>
 </div>
+<script>
+    async function fetchLatestFirstBrowserDownloadUrl(repo) {
+        if (!/^[\w\-.]+\/[\w\-.]+$/.test(repo)) {
+            throw new Error('Invalid repo format. Use owner/repo');
+        }
+        const url = `https://api.github.com/repos/${repo}/releases/latest`;
+        const res = await fetch(url, {headers: {'Accept': 'application/vnd.github+json'}});
+        if (!res.ok) {
+            throw new Error(`GitHub API returned status ${res.status}`);
+        }
+        const data = await res.json();
+        if (!data.assets || data.assets.length === 0) {
+            return '';
+        }
+        return data.assets[0].browser_download_url;
+    }
+</script>
 </body>
 </html>

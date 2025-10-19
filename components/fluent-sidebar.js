@@ -14,7 +14,8 @@ class FluentSidebar extends HTMLElement {
                     display: block;
                 }
                 /* 移除本地变量定义，使用全局变量 */
-                div,p,a,li{
+                div,p,a,li,label,span{
+                    color: var(--fluent-text);
                     font-family: "Segoe UI Variable", system-ui;
                 }
                 .sidebar {
@@ -100,8 +101,9 @@ class FluentSidebar extends HTMLElement {
                 </ul>
                 <div class="footer">
                     <fluent-switch id="themeSwitch">
-                        <fluent-icon name="moon"></fluent-icon>
-                        <fluent-icon ></fluent-icon>
+                        <span slot="checked-message">Dark</span>
+                        <span slot="unchecked-message">Light</span>
+                        <label for="cap-switch">Style:</label>
                     </fluent-switch>
                 </div>
             </nav>

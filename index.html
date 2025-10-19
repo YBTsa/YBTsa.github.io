@@ -21,10 +21,6 @@
                 --card-width: 45%;
             }
         }
-
-        body {
-            font-family: "Segoe UI", system-ui;
-        }
         .page-content {
             margin-left: 240px; /* 与侧边栏宽度匹配 */
             padding: 20px;
@@ -58,14 +54,14 @@
         <fluent-card>
             <h3>MFSC</h3>
             <p>YOptimizer is a tool that helps you optimize your PC's performance.</p>
-            <fluent-button appearance="accent" onclick="redirect('mfsc')" type="button">Download</fluent-button>
-            <script>
-                function redirect(id) {
-                    window.location.href = '/download.html#' + id;
-                }
-            </script>
+            <fluent-button appearance="accent" onclick="redirect()" type="button">Download</fluent-button>
         </fluent-card>
     </div>
 </div>
+<script>
+    function redirect() {
+        window.location.href = '/redirect.html?id=download'
+    }
+</script>
 </body>
 </html>
