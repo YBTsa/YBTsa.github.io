@@ -32,7 +32,7 @@
         <fluent-card id="mfsc">
             <h3>MFSC(Manager For School Computer)</h3>
             <p>Manager For School Computer is a tool that helps you optimize your school computer's performance.</p>
-            <fluent-button appearance="accent" data-repo="YBTsa/MFSC" onclick="window.location.href = fetchLatestFirstBrowserDownloadUrl('YBTsa/MFSC')"
+            <fluent-button appearance="accent" data-repo="YBTsa/MFSC" onclick="redirect('YBTsa/MFSC')"
                            type="button">Get
             </fluent-button>
         </fluent-card>
@@ -53,6 +53,12 @@
             return '';
         }
         return data.assets[0].browser_download_url;
+    }
+
+    function redirect(repo) {
+        fetchLatestFirstBrowserDownloadUrl(repo).then((res) => {
+            window.location.href = res;
+        })
     }
 </script>
 </body>
