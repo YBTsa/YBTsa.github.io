@@ -17,6 +17,7 @@ class FluentNavbar extends HTMLElement {
         .hamburger-btn.active .hamburger-bar:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
         .nav-links{display:flex;height:100%;align-items:stretch;gap:0;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
         .nav-link{display:flex;align-items:center;border-left:1px solid rgba(255,255,255,.15);padding:0 1.5rem;box-sizing:border-box}
+        .nav-link:first-child{border-left: none}
         a{color:#f8fafc;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;white-space:nowrap}
         a:hover{color:#93c5fd;text-shadow:0 0 8px rgba(147,197,253,.5)}
         @media (max-width:768px){
@@ -44,8 +45,9 @@ class FluentNavbar extends HTMLElement {
         </button>
         <div class="nav-links">
           <div class="nav-link"><a href="/">Dashboard</a></div>
-          <div class="nav-link"><a href="/">Article</a></div>
-          <div class="nav-link"><a href="/">Settings</a></div>
+          <div class="nav-link"><a href="/downloads">Downloads</a></div>
+          <div class="nav-link"><a href="/projects">Projects</a></div>
+          <div class="nav-link"><a href="/tools">Tools</a></div>
         </div>
       </div>
     `;

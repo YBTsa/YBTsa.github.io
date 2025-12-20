@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Dashboard | YBlog</title>
-    <link href="/css/style.css" rel="stylesheet">
+    <title>Dashboard | YBlog </title>
+    <link href="/css/style.min.css" rel="stylesheet">
     <link href="/images/favicon.webp" rel="icon" type="image/webp">
-    <script defer src="/components/fluent-navbar.js"></script>
-
-    <style>
-        :root {
-            --card-width: 20%;
-        }
-    </style>
+    <script defer src="/components/fluent-navbar.min.js"></script>
 </head>
 <body>
 <fluent-navbar></fluent-navbar>
-
+<div class="page-content">
+    <div class="fluent-card">
+        <section>
+            <h2>Projects</h2>
+            <div class="fluent-card-content-card">
+                <div class="card-header">
+                    <img alt="eo" src="/images/proj-eo.webp">
+                    <h3>Easy Optimization</h3>
+                </div>
+                <div class="card-body">
+                    <p>A simple Windows tweaker that can make your PC better.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 </body>
 </html>
